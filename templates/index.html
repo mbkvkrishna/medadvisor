@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MedAdvisor - Smart HealthCare</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+    <img src="/static/logo.png" class="logo">
+    <div>
+        <h1>MedAdvisor - Smart HealthCare</h1>
+        <p class="tagline">Precision Healing: Discover the Right Medicine for You!</p>
+    </div>
+</header>
+
+<form id="diseaseForm">
+    <div class="autocomplete-wrapper">
+        <input type="text" id="disease" placeholder="Enter Disease Name" autocomplete="off" required>
+        <ul id="suggestions" class="suggestions-list"></ul>
+    </div>
+    <input type="number" id="age" min="1" max="120" placeholder="Age (1-120)" required>
+    <select id="gender" required>
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+    <button type="submit">Get Medicine</button>
+</form>
+
+<div id="result"></div>
+
+<footer>
+    <p>This is a real-time project by B3 of CSE2 at Sreyas.</p>
+</footer>
+
+<script src="/static/main.js"></script>
+</body>
+</html>

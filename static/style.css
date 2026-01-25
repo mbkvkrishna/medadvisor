@@ -1,0 +1,120 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #eef3f8;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(90deg, #0a6cf1, #2d9cff);
+    color: white;
+    padding: 20px 40px;
+}
+
+.logo {
+    width: 65px;
+}
+
+form {
+    background: white;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    display: grid;
+    gap: 15px;
+    position: relative;
+}
+
+.autocomplete-wrapper {
+    position: relative;
+}
+
+input, select, button {
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#disease {
+    border: 2px solid #0a6cf1;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+button {
+    background: #0a6cf1;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #084bb8;
+}
+
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    max-height: 180px;
+    overflow-y: auto;
+    position: absolute;
+    background: white;
+    width: 100%;
+    z-index: 10;
+    border-radius: 6px;
+}
+
+.suggestions-list li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestions-list li:hover {
+    background: #f0f0f0;
+}
+
+.suggestions-list .no-suggestion {
+    padding: 8px;
+    color: #888;
+    font-style: italic;
+}
+
+#result {
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.medicine-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    background: white;
+}
+
+.medicine-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dosage {
+    background: #f1f7ff;
+    padding: 8px;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #d72222;
+}
