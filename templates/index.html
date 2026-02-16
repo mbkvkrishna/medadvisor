@@ -14,6 +14,7 @@
         {% if user %}
             <span class="welcome">Welcome, {{ user.display_name }}</span>
             <a href="/logout" class="link-btn">Logout</a>
+            <button id="deleteAccountBtn" class="link-btn">Delete Account</button>
         {% else %}
             <a href="/login" class="link-btn">Login</a>
             <a href="/signup" class="link-btn">Signup</a>

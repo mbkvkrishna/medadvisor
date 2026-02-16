@@ -23,23 +23,26 @@ def signup_page():
 def results():
     return render_template("results.html", user=session.get("user"))
 
+@app.route("/bookmarks")
+def bookmarks_page():
+    if "user" not in session:
+        return redirect("/login")
+    return render_template("bookmarks.html", user=session.get("user"))
+
 @app.route("/signup_user", methods=["POST"])
 def signup_user():
     data = request.json
     username = data["username"]
     password = data["password"]
-
     existing = supabase.table("users").select("*").eq("username", username).execute()
     if existing.data:
         return jsonify({"success": False})
-
     response = supabase.table("users").insert({
         "username": username,
         "password": password,
         "display_name": username,
         "theme": "light"
     }).execute()
-
     session["user"] = response.data[0]
     return jsonify({"success": True})
 
@@ -48,11 +51,9 @@ def login_user():
     data = request.json
     username = data["username"]
     password = data["password"]
-
     response = supabase.table("users").select("*").eq("username", username).eq("password", password).execute()
     if not response.data:
         return jsonify({"success": False})
-
     session["user"] = response.data[0]
     return jsonify({"success": True})
 
@@ -76,14 +77,11 @@ def get_medicines():
     disease_input = data.get("disease", "").strip()
     age = int(data.get("age", 0))
     gender = data.get("gender", "")
-
     response = supabase.table("medicines").select("*").eq("disease", disease_input).execute()
     if not response.data:
         return jsonify({"medicines": [], "description": ""})
-
     medicines = []
     description = response.data[0]["description"]
-
     for med in response.data:
         dosage = med["dosage_child"] if age < 12 else med["dosage_adult"]
         precautions = med["precautions"]
@@ -95,8 +93,7 @@ def get_medicines():
             "dosage": dosage,
             "precautions": precautions
         })
-
-    return jsonify({"medicines": medicines, "description": description})
+    return jsonify({"medicines": medicines, "description": description, "disease": disease_input})
 
 @app.route("/save_search", methods=["POST"])
 def save_search():
@@ -128,6 +125,24 @@ def bookmark():
         "disease": data["disease"],
         "result": data["result"]
     }).execute()
+    return jsonify({"success": True})
+
+@app.route("/get_bookmarks")
+def get_bookmarks():
+    if "user" not in session:
+        return jsonify({"bookmarks": []})
+    response = supabase.table("bookmarks").select("*").eq("user_id", session["user"]["id"]).order("created_at", desc=True).execute()
+    return jsonify({"bookmarks": response.data})
+
+@app.route("/delete_account", methods=["POST"])
+def delete_account():
+    if "user" not in session:
+        return jsonify({"success": False})
+    user_id = session["user"]["id"]
+    supabase.table("bookmarks").delete().eq("user_id", user_id).execute()
+    supabase.table("searches").delete().eq("user_id", user_id).execute()
+    supabase.table("users").delete().eq("id", user_id).execute()
+    session.clear()
     return jsonify({"success": True})
 
 if __name__ == "__main__":
