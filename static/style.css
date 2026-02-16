@@ -1,207 +1,228 @@
-:root{
-    --bg:#f4f6f9;
-    --card:#ffffff;
-    --text:#1f2937;
-    --primary:#2563eb;
-    --border:#e5e7eb;
-    --hover:#1d4ed8;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
-body.dark{
-    --bg:#0f172a;
-    --card:#1e293b;
-    --text:#f1f5f9;
-    --primary:#3b82f6;
-    --border:#334155;
-    --hover:#2563eb;
+body.dark {
+    background-color: #121212;
+    color: #f5f5f5;
 }
 
-body{
-    margin:0;
-    font-family:Segoe UI, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    transition:0.3s ease;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1e90ff;
+    color: white;
 }
 
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    background:var(--card);
-    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+.logo-area {
+    display: flex;
+    align-items: center;
 }
 
-.logo-area{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.logo-area img.logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
 }
 
-.logo{
-    width:55px;
+.header-actions {
+    display: flex;
+    align-items: center;
 }
 
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.header-actions .welcome {
+    margin-right: 10px;
 }
 
-.link-btn{
-    text-decoration:none;
-    padding:8px 16px;
-    border-radius:6px;
-    border:1px solid var(--border);
-    color:var(--text);
-    background:var(--card);
-    transition:0.2s;
+.header-actions .link-btn, #deleteAccountBtn {
+    margin-left: 10px;
+    padding: 6px 12px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s;
 }
 
-.link-btn:hover{
-    background:var(--primary);
-    color:white;
+.header-actions .link-btn:hover, #deleteAccountBtn:hover {
+    background-color: #d9363e;
 }
 
-.toggle{
-    cursor:pointer;
-    padding:8px 16px;
-    border-radius:6px;
-    border:1px solid var(--border);
-    background:var(--card);
-    transition:0.2s;
+.header-actions .toggle {
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 6px 12px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
 }
 
-.toggle:hover{
-    background:var(--primary);
-    color:white;
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
 }
 
-.welcome{
-    font-weight:600;
+h2 {
+    margin-bottom: 15px;
 }
 
-.container{
-    max-width:900px;
-    margin:40px auto;
-    padding:30px;
-    background:var(--card);
-    border-radius:12px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.07);
+input, select, button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
-.hero-img{
-    width:100%;
-    border-radius:12px;
-    margin-bottom:25px;
+button {
+    cursor: pointer;
 }
 
-form{
-    display:grid;
-    gap:20px;
+.autocomplete-wrapper {
+    position: relative;
 }
 
-input,select,button{
-    width:100%;
-    height:48px;
-    padding:0 15px;
-    border-radius:8px;
-    border:1px solid var(--border);
-    font-size:15px;
-    box-sizing:border-box;
-    background:var(--bg);
-    color:var(--text);
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
 }
 
-button{
-    background:var(--primary);
-    color:#fff;
-    border:none;
-    cursor:pointer;
-    transition:0.2s;
+.suggestions-list li {
+    padding: 8px;
+    cursor: pointer;
 }
 
-button:hover{
-    background:var(--hover);
+.suggestions-list li:hover {
+    background-color: #f0f0f0;
 }
 
-.autocomplete-wrapper{
-    position:relative;
+#resultSection {
+    margin-top: 20px;
 }
 
-.suggestions-list{
-    position:absolute;
-    width:100%;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:8px;
-    max-height:180px;
-    overflow-y:auto;
-    margin-top:5px;
-    list-style:none;
-    padding:0;
-    z-index:10;
+#bookmarkBtn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
 }
 
-.suggestions-list li{
-    padding:10px;
-    cursor:pointer;
+#bookmarkBtn:hover {
+    background-color: #1c86ee;
 }
 
-.suggestions-list li:hover{
-    background:var(--bg);
+.medicine-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
 }
 
-.medicine-card{
-    border:1px solid var(--border);
-    padding:20px;
-    border-radius:10px;
-    margin-top:20px;
-    background:var(--bg);
+body.dark .medicine-card {
+    background-color: #1f1f1f;
+    border-color: #333;
 }
 
-.medicine-name{
-    font-weight:bold;
-    font-size:18px;
+.medicine-card .medicine-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
-.dosage{
-    margin-top:10px;
-    padding:8px;
-    border-radius:6px;
-    background:var(--card);
+.medicine-card .dosage {
+    font-style: italic;
+    margin-bottom: 8px;
 }
 
-.home-btn{
-    margin-top:30px;
-    text-align:center;
+.medicine-card ul {
+    padding-left: 20px;
 }
 
-.home-btn a{
-    text-decoration:none;
-    padding:10px 20px;
-    background:var(--primary);
-    color:white;
-    border-radius:6px;
+.medicine-card ul li {
+    margin-bottom: 4px;
 }
 
-#recentSection{
-    margin-top:30px;
+#recentList {
+    list-style: none;
+    padding: 0;
 }
 
-#recentSection ul{
-    list-style:none;
-    padding:0;
+#recentList li {
+    margin-bottom: 6px;
+    font-size: 15px;
 }
 
-#recentSection li{
-    padding:8px 0;
-    border-bottom:1px solid var(--border);
+#bookmarkList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-#successMsg{
-    margin-top:15px;
-    color:green;
-    font-weight:600;
+#bookmarkList li {
+    margin-bottom: 10px;
+}
+
+#bookmarkList li button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #1e90ff;
+    text-decoration: underline;
+    font-size: 16px;
+    padding: 5px 0;
+}
+
+#bookmarkList li button:hover {
+    color: #104e8b;
+}
+
+.home-btn a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.home-btn a:hover {
+    background-color: #449d48;
+}
+
+h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 10px;
 }
