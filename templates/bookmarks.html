@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookmarks - MedAdvisor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <div class="logo-area">
+        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966483.png" class="logo">
+        <h2>MedAdvisor</h2>
+    </div>
+    <div class="header-actions">
+        {% if user %}
+            <span class="welcome">Welcome, {{ user.display_name }}</span>
+            <a href="/logout" class="link-btn">Logout</a>
+            <a href="/" class="link-btn">Home</a>
+            <button id="deleteAccountBtn" class="link-btn">Delete Account</button>
+        {% else %}
+            <a href="/login" class="link-btn">Login</a>
+            <a href="/signup" class="link-btn">Signup</a>
+        {% endif %}
+        <div class="toggle" onclick="toggleMode()">Toggle Theme</div>
+    </div>
+</header>
+
+<div class="container">
+    <h2>My Bookmarks</h2>
+    <ul id="bookmarkList"></ul>
+</div>
+
+<script>
+async function loadBookmarks(){
+    const list = document.getElementById("bookmarkList")
+    const response = await fetch("/get_bookmarks")
+    const data = await response.json()
+    list.innerHTML = ""
+    if(data.bookmarks.length === 0){
+        list.innerHTML = "<li>No bookmarks saved.</li>"
+    } else {
+        data.bookmarks.forEach(b=>{
+            const li = document.createElement("li")
+            li.textContent = b.disease
+            list.appendChild(li)
+        })
+    }
+}
+window.onload = loadBookmarks
+
+const deleteBtn = document.getElementById("deleteAccountBtn")
+if(deleteBtn){
+    deleteBtn.addEventListener("click", async ()=>{
+        if(!confirm("Are you sure you want to delete your account? This cannot be undone.")) return
+        const response = await fetch("/delete_account", { method: "POST" })
+        const data = await response.json()
+        if(data.success){
+            alert("Account deleted successfully.")
+            window.location.href = "/"
+        } else { alert("Failed to delete account.") }
+    })
+}
+</script>
+</body>
+</html>

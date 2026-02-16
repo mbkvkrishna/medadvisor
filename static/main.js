@@ -98,15 +98,27 @@ if(document.getElementById("result")){
     }
 }
 
-async function saveBookmark(){
-    const data = JSON.parse(localStorage.getItem("resultData"))
-    const diseaseName = data.disease || "Unknown"
-    await fetch("/bookmark", {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({disease: diseaseName, result: data})
-    })
-    alert("Saved")
+const bookmarkBtn = document.getElementById("bookmarkBtn")
+if(bookmarkBtn){
+    bookmarkBtn.style.marginTop = "20px"
+    bookmarkBtn.style.padding = "10px 20px"
+    bookmarkBtn.style.backgroundColor = "#1e90ff"
+    bookmarkBtn.style.color = "white"
+    bookmarkBtn.style.border = "none"
+    bookmarkBtn.style.borderRadius = "6px"
+    bookmarkBtn.style.cursor = "pointer"
+    bookmarkBtn.onmouseover = ()=>{bookmarkBtn.style.backgroundColor = "#1c86ee"}
+    bookmarkBtn.onmouseout = ()=>{bookmarkBtn.style.backgroundColor = "#1e90ff"}
+    bookmarkBtn.onclick = async ()=>{
+        const data = JSON.parse(localStorage.getItem("resultData"))
+        const diseaseName = data.disease || "Unknown"
+        await fetch("/bookmark", {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({disease: diseaseName, result: data})
+        })
+        alert("Saved")
+    }
 }
 
 async function loadRecent(){
@@ -131,8 +143,6 @@ if(deleteBtn){
         if(data.success){
             alert("Account deleted successfully.")
             window.location.href = "/"
-        } else {
-            alert("Failed to delete account.")
-        }
+        } else { alert("Failed to delete account.") }
     })
 }
