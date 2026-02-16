@@ -18,10 +18,12 @@
 
 <div class="container">
     <h2>Signup</h2>
-    <input id="username" placeholder="Username">
-    <input id="password" type="password" placeholder="Password">
-    <button onclick="signupUser()">Signup</button>
-    <p id="successMsg"></p>
+    <form onsubmit="signupUser(); return false;">
+        <input id="username" placeholder="Username" required>
+        <input id="password" type="password" placeholder="Password" required>
+        <button type="submit">Signup</button>
+        <p id="successMsg"></p>
+    </form>
 </div>
 
 <script src="/static/main.js"></script>

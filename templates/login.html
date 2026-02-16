@@ -18,9 +18,11 @@
 
 <div class="container">
     <h2>Login</h2>
-    <input id="username" placeholder="Username">
-    <input id="password" type="password" placeholder="Password">
-    <button onclick="loginUser()">Login</button>
+    <form onsubmit="loginUser(); return false;">
+        <input id="username" placeholder="Username" required>
+        <input id="password" type="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
 </div>
 
 <script src="/static/main.js"></script>
