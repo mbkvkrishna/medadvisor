@@ -29,6 +29,7 @@
     <ol id="bookmarkList"></ol>
 </div>
 
+<script src="/static/main.js"></script>
 <script>
 async function loadBookmarks(){
     const list = document.getElementById("bookmarkList")
@@ -57,9 +58,12 @@ async function loadBookmarks(){
         })
     }
 }
-window.onload = loadBookmarks
-</script>
 
-<script src="/static/main.js"></script>
+document.addEventListener("DOMContentLoaded", async ()=>{
+    if(typeof loadBookmarks === "function"){
+        loadBookmarks()
+    }
+})
+</script>
 </body>
 </html>
