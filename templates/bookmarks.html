@@ -58,19 +58,8 @@ async function loadBookmarks(){
     }
 }
 window.onload = loadBookmarks
-
-const deleteBtn = document.getElementById("deleteAccountBtn")
-if(deleteBtn){
-    deleteBtn.addEventListener("click", async ()=>{
-        if(!confirm("Are you sure you want to delete your account? This cannot be undone.")) return
-        const response = await fetch("/delete_account", { method: "POST" })
-        const data = await response.json()
-        if(data.success){
-            alert("Account deleted successfully.")
-            window.location.href = "/"
-        } else { alert("Failed to delete account.") }
-    })
-}
 </script>
+
+<script src="/static/main.js"></script>
 </body>
 </html>
