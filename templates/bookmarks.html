@@ -26,7 +26,7 @@
 
 <div class="container">
     <h2>My Bookmarks</h2>
-    <ul id="bookmarkList"></ul>
+    <ol id="bookmarkList"></ol>
 </div>
 
 <script>
@@ -38,6 +38,7 @@ async function loadBookmarks(){
     if(data.bookmarks.length === 0){
         list.innerHTML = "<li>No bookmarks saved.</li>"
     } else {
+        data.bookmarks.sort((a,b)=>a.disease.localeCompare(b.disease))
         data.bookmarks.forEach(b=>{
             const li = document.createElement("li")
             const btn = document.createElement("button")
