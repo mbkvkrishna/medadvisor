@@ -40,7 +40,18 @@ async function loadBookmarks(){
     } else {
         data.bookmarks.forEach(b=>{
             const li = document.createElement("li")
-            li.textContent = b.disease
+            const btn = document.createElement("button")
+            btn.textContent = b.disease
+            btn.style.cursor = "pointer"
+            btn.style.background = "none"
+            btn.style.border = "none"
+            btn.style.color = "#1e90ff"
+            btn.style.textDecoration = "underline"
+            btn.onclick = ()=>{
+                localStorage.setItem("resultData", JSON.stringify(b.result))
+                window.location.href = "/results"
+            }
+            li.appendChild(btn)
             list.appendChild(li)
         })
     }
