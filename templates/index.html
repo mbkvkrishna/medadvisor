@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MedAdvisor - Smart HealthCare</title>
+    <title>MedAdvisor</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-
 <header>
-    <img src="/static/logo.png" class="logo">
-    <div>
-        <h1>MedAdvisor - Smart HealthCare</h1>
-        <p class="tagline">Precision Healing: Discover the Right Medicine for You!</p>
+    <div class="logo-area">
+        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966483.png" class="logo">
+        <h2>MedAdvisor</h2>
     </div>
+    <div class="toggle" onclick="toggleMode()">Toggle Theme</div>
 </header>
 
-<form id="diseaseForm">
-    <div class="autocomplete-wrapper">
-        <input type="text" id="disease" placeholder="Enter Disease Name" autocomplete="off" required>
-        <ul id="suggestions" class="suggestions-list"></ul>
-    </div>
-    <input type="number" id="age" min="1" max="120" placeholder="Age (1-120)" required>
-    <select id="gender" required>
-        <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-    </select>
-    <button type="submit">Get Medicine</button>
-</form>
-
-<div id="result"></div>
-
-<footer>
-    <p>This is a real-time project by B3 of CSE2 at Sreyas.</p>
-</footer>
+<div class="container">
+    <img src="https://images.unsplash.com/photo-1580281657521-8e5a0b7e06a1" class="hero-img">
+    <form id="diseaseForm">
+        <div class="autocomplete-wrapper">
+            <input type="text" id="disease" placeholder="Enter Disease Name" autocomplete="off" required>
+            <ul id="suggestions" class="suggestions-list"></ul>
+        </div>
+        <input type="number" id="age" min="1" max="120" placeholder="Enter Age" required>
+        <select id="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <button type="submit">Get Medicine Recommendation</button>
+    </form>
+</div>
 
 <script src="/static/main.js"></script>
 </body>

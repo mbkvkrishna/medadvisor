@@ -10,6 +10,10 @@ supabase = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 def index():
     return render_template("index.html")
 
+@app.route("/results")
+def results():
+    return render_template("results.html")
+
 @app.route("/get_diseases", methods=["POST"])
 def get_diseases():
     query = request.json.get("disease", "").strip()
