@@ -27,7 +27,9 @@
 <div class="container">
     <div id="resultSection">
         <div id="result"></div>
+        {% if user %}
         <button id="bookmarkBtn" onclick="saveBookmark()">Save Bookmark</button>
+        {% endif %}
     </div>
     <div class="home-btn">
         <a href="/">Back to Home</a>
