@@ -14,7 +14,7 @@
 </header>
 
 <div class="container">
-    <img src="https://images.unsplash.com/photo-1580281657521-8e5a0b7e06a1" class="hero-img">
+    <img src="{{ url_for('static', filename='back.png') }}" class="hero-img">
     <form id="diseaseForm">
         <div class="autocomplete-wrapper">
             <input type="text" id="disease" placeholder="Enter Disease Name" autocomplete="off" required>
