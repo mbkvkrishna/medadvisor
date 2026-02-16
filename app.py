@@ -11,12 +11,20 @@ supabase = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 def index():
     return render_template("index.html", user=session.get("user"))
 
+@app.route("/login")
+def login_page():
+    return render_template("login.html", user=session.get("user"))
+
+@app.route("/signup")
+def signup_page():
+    return render_template("signup.html", user=session.get("user"))
+
 @app.route("/results")
 def results():
     return render_template("results.html", user=session.get("user"))
 
-@app.route("/signup", methods=["POST"])
-def signup():
+@app.route("/signup_user", methods=["POST"])
+def signup_user():
     data = request.json
     username = data["username"]
     password = data["password"]
@@ -35,8 +43,8 @@ def signup():
     session["user"] = response.data[0]
     return jsonify({"success": True})
 
-@app.route("/login", methods=["POST"])
-def login():
+@app.route("/login_user", methods=["POST"])
+def login_user():
     data = request.json
     username = data["username"]
     password = data["password"]
@@ -121,13 +129,6 @@ def bookmark():
         "result": data["result"]
     }).execute()
     return jsonify({"success": True})
-
-@app.route("/get_bookmarks")
-def get_bookmarks():
-    if "user" not in session:
-        return jsonify({"bookmarks": []})
-    response = supabase.table("bookmarks").select("*").eq("user_id", session["user"]["id"]).execute()
-    return jsonify({"bookmarks": response.data})
 
 if __name__ == "__main__":
     app.run(debug=True)

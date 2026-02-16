@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - MedAdvisor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <div class="logo-area">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+        <h2>MedAdvisor</h2>
+    </div>
+    <div class="header-actions">
+        <a href="/" class="link-btn">Home</a>
+        <div class="toggle" onclick="toggleMode()">Toggle Theme</div>
+    </div>
+</header>
+
+<div class="container">
+    <h2>Login</h2>
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="loginUser()">Login</button>
+</div>
+
+<script src="/static/main.js"></script>
+</body>
+</html>

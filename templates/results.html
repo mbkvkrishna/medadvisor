@@ -8,12 +8,15 @@
 <header>
     <div class="logo-area">
         <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
-        <h2>Results</h2>
+        <h2>MedAdvisor</h2>
     </div>
     <div class="header-actions">
         {% if user %}
             <span class="welcome">Welcome, {{ user.display_name }}</span>
             <a href="/logout" class="link-btn">Logout</a>
+        {% else %}
+            <a href="/login" class="link-btn">Login</a>
+            <a href="/signup" class="link-btn">Signup</a>
         {% endif %}
         <div class="toggle" onclick="toggleMode()">Toggle Theme</div>
     </div>

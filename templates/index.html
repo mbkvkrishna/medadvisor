@@ -15,8 +15,8 @@
             <span class="welcome">Welcome, {{ user.display_name }}</span>
             <a href="/logout" class="link-btn">Logout</a>
         {% else %}
-            <button onclick="openLogin()">Login</button>
-            <button onclick="openSignup()">Signup</button>
+            <a href="/login" class="link-btn">Login</a>
+            <a href="/signup" class="link-btn">Signup</a>
         {% endif %}
         <div class="toggle" onclick="toggleMode()">Toggle Theme</div>
     </div>
@@ -44,16 +44,6 @@
         <ul id="recentList"></ul>
     </div>
     {% endif %}
-</div>
-
-<div id="authModal" class="modal">
-    <div class="modal-box">
-        <h3 id="authTitle"></h3>
-        <input id="authUsername" placeholder="Username">
-        <input id="authPassword" type="password" placeholder="Password">
-        <button onclick="submitAuth()">Submit</button>
-        <button onclick="closeAuth()">Close</button>
-    </div>
 </div>
 
 <script src="/static/main.js"></script>

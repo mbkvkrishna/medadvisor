@@ -2,6 +2,7 @@ function toggleMode(){
     document.body.classList.toggle("dark")
     localStorage.setItem("theme",document.body.classList.contains("dark")?"dark":"light")
 }
+
 window.onload=function(){
     if(localStorage.getItem("theme")==="dark"){
         document.body.classList.add("dark")
@@ -9,31 +10,24 @@ window.onload=function(){
     loadRecent()
 }
 
-let authMode="login"
-
-function openLogin(){
-    authMode="login"
-    document.getElementById("authTitle").innerText="Login"
-    document.getElementById("authModal").style.display="flex"
-}
-function openSignup(){
-    authMode="signup"
-    document.getElementById("authTitle").innerText="Signup"
-    document.getElementById("authModal").style.display="flex"
-}
-function closeAuth(){
-    document.getElementById("authModal").style.display="none"
-}
-async function submitAuth(){
-    const username=document.getElementById("authUsername").value
-    const password=document.getElementById("authPassword").value
-    const response=await fetch("/"+authMode,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({username,password})
-    })
+async function loginUser(){
+    const username=document.getElementById("username").value
+    const password=document.getElementById("password").value
+    const response=await fetch("/login_user",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username,password})})
     const data=await response.json()
-    if(data.success){location.reload()}else{alert("Failed")}
+    if(data.success){window.location.href="/"}else{alert("Invalid credentials")}
+}
+
+async function signupUser(){
+    const username=document.getElementById("username").value
+    const password=document.getElementById("password").value
+    const response=await fetch("/signup_user",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username,password})})
+    const data=await response.json()
+    if(data.success){
+        document.getElementById("successMsg").innerText="Signup successful!"
+    }else{
+        alert("Username already exists")
+    }
 }
 
 const diseaseInput=document.getElementById("disease")
