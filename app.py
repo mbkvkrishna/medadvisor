@@ -1,18 +1,57 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect
 from supabase import create_client
 import os
 
 app = Flask(__name__)
+app.secret_key = "supersecretkey"
 
 supabase = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", user=session.get("user"))
 
 @app.route("/results")
 def results():
-    return render_template("results.html")
+    return render_template("results.html", user=session.get("user"))
+
+@app.route("/signup", methods=["POST"])
+def signup():
+    data = request.json
+    username = data["username"]
+    password = data["password"]
+
+    existing = supabase.table("users").select("*").eq("username", username).execute()
+    if existing.data:
+        return jsonify({"success": False})
+
+    response = supabase.table("users").insert({
+        "username": username,
+        "password": password,
+        "display_name": username,
+        "theme": "light"
+    }).execute()
+
+    session["user"] = response.data[0]
+    return jsonify({"success": True})
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    username = data["username"]
+    password = data["password"]
+
+    response = supabase.table("users").select("*").eq("username", username).eq("password", password).execute()
+    if not response.data:
+        return jsonify({"success": False})
+
+    session["user"] = response.data[0]
+    return jsonify({"success": True})
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
 
 @app.route("/get_diseases", methods=["POST"])
 def get_diseases():
@@ -50,3 +89,45 @@ def get_medicines():
         })
 
     return jsonify({"medicines": medicines, "description": description})
+
+@app.route("/save_search", methods=["POST"])
+def save_search():
+    if "user" not in session:
+        return jsonify({"success": False})
+    data = request.json
+    supabase.table("searches").insert({
+        "user_id": session["user"]["id"],
+        "disease": data["disease"],
+        "age": data["age"],
+        "gender": data["gender"]
+    }).execute()
+    return jsonify({"success": True})
+
+@app.route("/get_recent")
+def get_recent():
+    if "user" not in session:
+        return jsonify({"searches": []})
+    response = supabase.table("searches").select("*").eq("user_id", session["user"]["id"]).order("created_at", desc=True).limit(5).execute()
+    return jsonify({"searches": response.data})
+
+@app.route("/bookmark", methods=["POST"])
+def bookmark():
+    if "user" not in session:
+        return jsonify({"success": False})
+    data = request.json
+    supabase.table("bookmarks").insert({
+        "user_id": session["user"]["id"],
+        "disease": data["disease"],
+        "result": data["result"]
+    }).execute()
+    return jsonify({"success": True})
+
+@app.route("/get_bookmarks")
+def get_bookmarks():
+    if "user" not in session:
+        return jsonify({"bookmarks": []})
+    response = supabase.table("bookmarks").select("*").eq("user_id", session["user"]["id"]).execute()
+    return jsonify({"bookmarks": response.data})
+
+if __name__ == "__main__":
+    app.run(debug=True)

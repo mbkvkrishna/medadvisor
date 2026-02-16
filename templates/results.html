@@ -7,14 +7,21 @@
 <body>
 <header>
     <div class="logo-area">
-        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966483.png" class="logo">
-        <h2>MedAdvisor Results</h2>
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+        <h2>Results</h2>
     </div>
-    <div class="toggle" onclick="toggleMode()">Toggle Theme</div>
+    <div class="header-actions">
+        {% if user %}
+            <span class="welcome">Welcome, {{ user.display_name }}</span>
+            <a href="/logout" class="link-btn">Logout</a>
+        {% endif %}
+        <div class="toggle" onclick="toggleMode()">Toggle Theme</div>
+    </div>
 </header>
 
 <div class="container">
     <div id="result"></div>
+    <button onclick="saveBookmark()">Save Bookmark</button>
     <div class="home-btn">
         <a href="/">Back to Home</a>
     </div>
